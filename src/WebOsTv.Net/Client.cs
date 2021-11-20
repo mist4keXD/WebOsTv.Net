@@ -143,14 +143,14 @@ namespace WebOsTv.Net
             }
         }
 
-        public async Task SendButtonAsync(ButtonTypes type)
+        public async Task SendButtonAsync(ButtonType type)
         {
             if (!_mouseSocket.IsAlive)
                 await ConnectAsync(_hostName);
 
             _logger.LogTrace($"Sending Button: {type}");
 
-            _mouseSocket.Send($"type:button\nname:{type.ToString().ToUpperInvariant()}\n\n");
+            _mouseSocket.Send($"type:button\nname:{type.ButtonCode}\n\n");
         }
 
         public void Close()

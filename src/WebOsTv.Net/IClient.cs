@@ -9,7 +9,7 @@ namespace WebOsTv.Net
     {
         Task ConnectAsync(string hostName);
         Task<TResponse> SendCommandAsync<TResponse>(CommandBase command) where TResponse : ResponseBase;
-        Task SendButtonAsync(ButtonTypes type);
+        Task SendButtonAsync(ButtonType type);
         void Close();
     }
 }

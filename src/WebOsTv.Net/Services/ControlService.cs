@@ -54,7 +54,7 @@ namespace WebOsTv.Net.Services
                 case ControlIntent.Blue:
                 case ControlIntent.Yellow:
                 case ControlIntent.Green:
-                    await _client.SendButtonAsync((ButtonTypes) Enum.Parse(typeof(ButtonTypes), intent.ToString()));
+                    await _client.SendButtonAsync(ButtonType.GetByDisplayName(intent.ToString()));
                     break;
                 case ControlIntent.FastForward:
                     await _client.SendCommandAsync<ControlFastForwardResponse>(new ControlFastForwardCommand());

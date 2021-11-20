@@ -271,7 +271,7 @@ namespace WebOsTv.Net.Tests
         [DebugOnly]
         public async void TestButton()
         {
-            await _client.SendButtonAsync(ButtonTypes.Home);
+            await _client.SendButtonAsync(ButtonType.Home);
         }
         #endregion
     }

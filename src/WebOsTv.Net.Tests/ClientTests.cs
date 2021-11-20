@@ -258,7 +258,7 @@ namespace WebOsTv.Net.Tests
             var client = new Client(keyStore, factory, new NullLogger<Client>());
             client.SetSocketsForTesting(mainSocket, mouseSocket);
 
-            await client.SendButtonAsync(ButtonTypes.Back);
+            await client.SendButtonAsync(ButtonType.Back);
 
             mouseSocketMock.Verify(x => x.Send(It.IsAny<string>()));
         }

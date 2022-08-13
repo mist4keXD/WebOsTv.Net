@@ -109,19 +109,10 @@ namespace WebOsTv.Net
 
             _socket.Send(json);
 
-            var timeoutTask = Task.Delay(request.Type == "register" ? 60000 : CommandTimeout);
             var responseTask = taskSource.Task;
+            var response = responseTask.Result;
 
-            if (await Task.WhenAny(timeoutTask, responseTask) == responseTask)
-            {
-                var response = responseTask.Result;
-
-                return response.Payload.ToObject<TResponse>(
-                    JsonSerializer.CreateDefault(SerializationSettings.Default));
-            }
-
-            _completionSources.TryRemove(request.Id, out _);
-            throw new TimeoutException();
+            return response.Payload.ToObject<TResponse>(JsonSerializer.CreateDefault(SerializationSettings.Default));
         }
 
         internal void OnMessage(object sender, SocketMessageEventArgs e)

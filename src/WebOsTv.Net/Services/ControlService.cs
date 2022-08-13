@@ -32,7 +32,34 @@ namespace WebOsTv.Net.Services
             Play,
             Rewind,
             Stop,
-            PowerOff
+            PowerOff,
+
+            Enter,
+            Dash,
+            Info,
+            One,
+            Two,
+            Three,
+            Four,
+            Five,
+            Six,
+            Seven,
+            Eight,
+            Nine,
+            Zero,
+            Asterisk,
+            Cc,
+            Exit,
+            Menu,
+
+            QMenu,
+            LiveZoom,
+            Favorites,
+            GoToPrev,
+            GoToNext,
+            AspectRatio,
+            MyApps,
+            Recent
         }
 
         internal ControlService(IClient client)
@@ -54,6 +81,10 @@ namespace WebOsTv.Net.Services
                 case ControlIntent.Blue:
                 case ControlIntent.Yellow:
                 case ControlIntent.Green:
+                case ControlIntent.Dash:
+                case ControlIntent.Enter:
+                case ControlIntent.Info:
+                case ControlIntent.Menu:
                     await _client.SendButtonAsync(ButtonType.GetByDisplayName(intent.ToString()));
                     break;
                 case ControlIntent.FastForward:
@@ -74,6 +105,72 @@ namespace WebOsTv.Net.Services
                 case ControlIntent.PowerOff:
                     await _client.SendCommandAsync<PowerOffResponse>(new PowerOffCommand());
                     break;
+                case ControlIntent.One:
+                    await _client.SendButtonAsync(ButtonType.One);
+                    break;
+                case ControlIntent.Two:
+                    await _client.SendButtonAsync(ButtonType.Two);
+                    break;
+                case ControlIntent.Three:
+                    await _client.SendButtonAsync(ButtonType.Three);
+                    break;
+                case ControlIntent.Four:
+                    await _client.SendButtonAsync(ButtonType.Four);
+                    break;
+                case ControlIntent.Five:
+                    await _client.SendButtonAsync(ButtonType.Five);
+                    break;
+                case ControlIntent.Six:
+                    await _client.SendButtonAsync(ButtonType.Six);
+                    break;
+                case ControlIntent.Seven:
+                    await _client.SendButtonAsync(ButtonType.Seven);
+                    break;
+                case ControlIntent.Eight:
+                    await _client.SendButtonAsync(ButtonType.Eight);
+                    break;
+                case ControlIntent.Nine:
+                    await _client.SendButtonAsync(ButtonType.Nine);
+                    break;
+                case ControlIntent.Zero:
+                    await _client.SendButtonAsync(ButtonType.Zero);
+                    break;
+                case ControlIntent.Asterisk:
+                    await _client.SendButtonAsync(ButtonType.Asterisk);
+                    break;
+                case ControlIntent.Cc:
+                    await _client.SendButtonAsync(ButtonType.Cc);
+                    break;
+                case ControlIntent.Exit:
+                    await _client.SendButtonAsync(ButtonType.Exit);
+                    break;
+
+                case ControlIntent.QMenu:
+                    await _client.SendButtonAsync(ButtonType.QMenu);
+                    break;
+                case ControlIntent.LiveZoom:
+                    await _client.SendButtonAsync(ButtonType.LiveZoom);
+                    break;
+                case ControlIntent.Favorites:
+                    await _client.SendButtonAsync(ButtonType.Favorites);
+                    break;
+                case ControlIntent.GoToPrev:
+                    await _client.SendButtonAsync(ButtonType.GoToPrev);
+                    break;
+                case ControlIntent.GoToNext:
+                    await _client.SendButtonAsync(ButtonType.GoToNext);
+                    break;
+                case ControlIntent.AspectRatio:
+                    await _client.SendButtonAsync(ButtonType.AspectRatio);
+                    break;
+                case ControlIntent.MyApps:
+                    await _client.SendButtonAsync(ButtonType.MyApps);
+                    break;
+                case ControlIntent.Recent:
+                    await _client.SendButtonAsync(ButtonType.Recent);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(intent), intent, null);
             }
         }
     }

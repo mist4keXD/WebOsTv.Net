@@ -44,6 +44,15 @@ namespace WebOsTv.Net.Commands.Tv
         public static readonly ButtonType Rewind = new ButtonType("REWIND", "Rewind");
         public static readonly ButtonType FastForward = new ButtonType("FASTFORWARD", "Fast Forward");
 
+        public static readonly ButtonType QMenu = new ButtonType("QMENU", "Quick Select Menu");
+        public static readonly ButtonType LiveZoom = new ButtonType("LIVE_ZOOM", "Live Zoom");
+        public static readonly ButtonType Favorites = new ButtonType("FAVORITES", "Favorites");
+        public static readonly ButtonType GoToPrev = new ButtonType("GOTOPREV", "Go to Previous");
+        public static readonly ButtonType GoToNext = new ButtonType("GOTONEXT", "Go to Next");
+        public static readonly ButtonType AspectRatio = new ButtonType("ASPECT_RATIO", "Aspect Ratio");
+        public static readonly ButtonType MyApps = new ButtonType("MYAPPS", "My Apps");
+        public static readonly ButtonType Recent = new ButtonType("RECENT", "Recent");
+
         public static ButtonType[] All => new[]
         {
             Left,
@@ -82,7 +91,16 @@ namespace WebOsTv.Net.Commands.Tv
             Pause,
             Stop,
             Rewind,
-            FastForward
+            FastForward,
+
+            QMenu,
+            LiveZoom,
+            Favorites,
+            GoToPrev,
+            GoToNext,
+            AspectRatio,
+            MyApps,
+            Recent
         };
 
         public string ButtonCode { get; }

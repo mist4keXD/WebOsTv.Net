@@ -31,6 +31,7 @@ namespace WebOsTv.Net
         private ISocketConnection _mouseSocket;
 
         private string _hostName;
+        private bool _ssl;
 
         public int CommandTimeout { get; set; } = 5000;
 
@@ -52,13 +53,24 @@ namespace WebOsTv.Net
             _logger = logger;
         }
 
-        public async Task ConnectAsync(string hostName)
+        public async Task ConnectAsync(string hostName, bool ssl = false)
         {
+            _ssl = ssl;
+            var protocol = "ws";
+            var port = "3000";
+
             Close();
 
             _socket = _socketFactory.Create();
             _socket.OnMessage += OnMessage;
-            _socket.Connect($"ws://{hostName}:3000");
+
+            if(_ssl)
+            {
+                protocol = "wss";
+                port = "3001";
+            }
+
+            _socket.Connect($"{protocol}://{hostName}:{port}");
 
             if (!_socket.IsAlive)
                 throw new ConnectionException($"Unable to conenct to television at {hostName}.");
@@ -84,7 +96,7 @@ namespace WebOsTv.Net
         public virtual async Task<TResponse> SendCommandAsync<TResponse>(CommandBase command) where TResponse : ResponseBase
         {
             if (!_socket.IsAlive)
-                await ConnectAsync(_hostName);
+                await ConnectAsync(_hostName, _ssl);
 
             var request = new Message
             {
@@ -137,7 +149,7 @@ namespace WebOsTv.Net
         public async Task SendButtonAsync(ButtonType type)
         {
             if (!_mouseSocket.IsAlive)
-                await ConnectAsync(_hostName);
+                await ConnectAsync(_hostName, _ssl);
 
             _logger.LogTrace($"Sending Button: {type}");
 

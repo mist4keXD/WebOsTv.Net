@@ -52,6 +52,12 @@ namespace WebOsTv.Net.Commands.Tv
         public static readonly ButtonType AspectRatio = new ButtonType("ASPECT_RATIO", "Aspect Ratio");
         public static readonly ButtonType MyApps = new ButtonType("MYAPPS", "My Apps");
         public static readonly ButtonType Recent = new ButtonType("RECENT", "Recent");
+        public static readonly ButtonType EzPic = new ButtonType("EZPIC", "Pictore mode preset panel");
+        public static readonly ButtonType EzAdjust = new ButtonType("EZ_ADJUST", "EzAdjust Service Menu");
+        public static readonly ButtonType InStart = new ButtonType("IN_START", "InStart Service Menu");
+        public static readonly ButtonType InputHub = new ButtonType("INPUT_HUB", "Home Dashboard");
+        public static readonly ButtonType ScreenRemote = new ButtonType("SCREEN_REMOTE", "More Actions panel");
+        public static readonly ButtonType Search = new ButtonType("SEARCH", "Search");
 
         public static ButtonType[] All => new[]
         {
@@ -100,7 +106,13 @@ namespace WebOsTv.Net.Commands.Tv
             GoToNext,
             AspectRatio,
             MyApps,
-            Recent
+            Recent,
+            EzPic,
+            EzAdjust,
+            InStart,
+            InputHub,
+            ScreenRemote,
+            Search
         };
 
         public string ButtonCode { get; }

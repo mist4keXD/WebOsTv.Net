@@ -11,7 +11,7 @@ namespace WebOsTv.Net
         IControlService Control { get; }
         INotificationService Notifications { get; }
         ITvService Tv { get; }
-        Task ConnectAsync(string hostName);
+        Task ConnectAsync(string hostName, bool ssl = false);
         void Close();
     }
 }

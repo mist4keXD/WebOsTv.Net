@@ -7,7 +7,7 @@ namespace WebOsTv.Net
 {
     public interface IClient
     {
-        Task ConnectAsync(string hostName);
+        Task ConnectAsync(string hostName, bool ssl = false);
         Task<TResponse> SendCommandAsync<TResponse>(CommandBase command) where TResponse : ResponseBase;
         Task SendButtonAsync(ButtonType type);
         void Close();

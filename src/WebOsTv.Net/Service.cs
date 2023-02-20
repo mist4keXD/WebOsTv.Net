@@ -31,9 +31,9 @@ namespace WebOsTv.Net
         public virtual INotificationService Notifications { get; }
         public virtual ITvService Tv { get; }
 
-        public async Task ConnectAsync(string hostName)
+        public async Task ConnectAsync(string hostName, bool ssl = false)
         {
-            await _client.ConnectAsync(hostName);
+            await _client.ConnectAsync(hostName, ssl);
         }
 
         public void Close()

@@ -59,7 +59,13 @@ namespace WebOsTv.Net.Services
             GoToNext,
             AspectRatio,
             MyApps,
-            Recent
+            Recent,
+            EzPic,
+            EzAdjust,
+            InStart,
+            InputHub,
+            ScreenRemote,
+            Search
         }
 
         internal ControlService(IClient client)
@@ -168,6 +174,24 @@ namespace WebOsTv.Net.Services
                     break;
                 case ControlIntent.Recent:
                     await _client.SendButtonAsync(ButtonType.Recent);
+                    break;
+                case ControlIntent.EzPic:
+                    await _client.SendButtonAsync(ButtonType.EzPic);
+                    break;
+                case ControlIntent.EzAdjust:
+                    await _client.SendButtonAsync(ButtonType.EzAdjust);
+                    break;
+                case ControlIntent.InStart:
+                    await _client.SendButtonAsync(ButtonType.InStart);
+                    break;
+                case ControlIntent.InputHub:
+                    await _client.SendButtonAsync(ButtonType.InputHub);
+                    break;
+                case ControlIntent.ScreenRemote:
+                    await _client.SendButtonAsync(ButtonType.ScreenRemote);
+                    break;
+                case ControlIntent.Search:
+                    await _client.SendButtonAsync(ButtonType.Search);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(intent), intent, null);

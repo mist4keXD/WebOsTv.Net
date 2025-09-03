@@ -13,15 +13,14 @@ namespace WebOsTv.Net.Services
             _client = client;
         }
 
-        public async Task<VolumeDetails> VolumeGetAsync()
+        public async Task<VolumeDetails> VolumeStatusAsync()
         {
-            var response = await _client.SendCommandAsync<VolumeGetResponse>(new VolumeGetCommand());
+            var response = await _client.SendCommandAsync<VolumeStatusResponse>(new VolumeStatusCommand());
 
             return new VolumeDetails
             {
-                Muted = response.Muted,
-                Scenario = response.Scenario,
-                Volume = response.Volume
+                Volume = response.volume,
+                Muted = response.mute
             };
         }
 
@@ -33,7 +32,7 @@ namespace WebOsTv.Net.Services
             }
             else
             {
-                var volume = await VolumeGetAsync();
+                var volume = await VolumeStatusAsync();
                 await SetVolumeAsync(volume.Volume - by);
             }
         }
@@ -46,7 +45,7 @@ namespace WebOsTv.Net.Services
             }
             else
             {
-                var volume = await VolumeGetAsync();
+                var volume = await VolumeStatusAsync();
                 await SetVolumeAsync(volume.Volume + by);
             }
         }
@@ -61,6 +60,12 @@ namespace WebOsTv.Net.Services
             await _client.SendCommandAsync<VolumeMuteResponse>(new VolumeMuteCommand {Mute = false});
         }
 
+        public async Task MuteToggleAsync()
+        {
+            var volume = await VolumeStatusAsync();
+            await _client.SendCommandAsync<VolumeMuteResponse>(new VolumeMuteCommand { Mute = !volume.Muted });
+        }
+
         public async Task SetVolumeAsync(int volume)
         {
             await _client.SendCommandAsync<VolumeSetResponse>(new VolumeSetCommand {Volume = volume});
@@ -70,7 +75,6 @@ namespace WebOsTv.Net.Services
         {
             public int Volume { get; set; }
             public bool Muted { get; set; }
-            public string Scenario { get; set; }
         }
     }
 }

@@ -14,6 +14,12 @@ namespace WebOsTv.Net.WebSockets
             Url = url;
 
             _socket = new WebSocket(url);
+
+            if (url.StartsWith("wss://", StringComparison.OrdinalIgnoreCase))
+            {
+                _socket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
+            }
+
             _socket.OnMessage += (sender, args) => OnMessage?.Invoke(sender, new SocketMessageEventArgs(args.Data));
             _socket.Connect();
         }
